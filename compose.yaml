@@ -2,9 +2,12 @@ services:
   mysql:
     image: 'mysql:latest'
     environment:
-      - 'MYSQL_DATABASE=mydatabase'
-      - 'MYSQL_PASSWORD=secret'
-      - 'MYSQL_ROOT_PASSWORD=verysecret'
-      - 'MYSQL_USER=myuser'
+      - MYSQL_DATABASE=mydatabase
+      - MYSQL_PASSWORD=letmein
+      - MYSQL_ROOT_PASSWORD=letmein
+      - MYSQL_USER=user
+    volumes:
+      - ./.mysql-data/db:/var/lib/mysql
+    restart: always
     ports:
-      - '3306'
+      - 3306:3306
