@@ -11,8 +11,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.proxy.HibernateProxy;
 
 import java.io.Serializable;
+import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -20,7 +23,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-class Employee implements Serializable {
+public class Employee implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,4 +36,34 @@ class Employee implements Serializable {
 	private String phone;
 	private String imageUrl;
 	private String employeeCode;
+
+	public Employee(final String name, final String surname, final String email, final String jobTitle, final String phone, final String imageUrl) {
+		this.name = name;
+		this.surname = surname;
+		this.email = email;
+		this.jobTitle = jobTitle;
+		this.phone = phone;
+		this.imageUrl = imageUrl;
+		this.employeeCode = UUID.randomUUID().toString();
+	}
+
+	@Override
+	public final boolean equals(final Object o) {
+		if (this == o) return true;
+		if (o == null) return false;
+		Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer()
+		                                                                             .getPersistentClass() : o.getClass();
+		Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer()
+		                                                                                      .getPersistentClass() : this.getClass();
+		if (thisEffectiveClass != oEffectiveClass) return false;
+		final Employee employee = (Employee) o;
+		return getId() != null && Objects.equals(getId(), employee.getId());
+	}
+
+	@Override
+	public final int hashCode() {
+		return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer()
+		                                                               .getPersistentClass()
+		                                                               .hashCode() : getClass().hashCode();
+	}
 }
