@@ -21,4 +21,9 @@ class EmployeeService {
 	List<Employee> getAllEmployees() {
 		return employeeRepository.findAll();
 	}
+
+	Employee updateEmployee(final Employee employee) {
+		log.info("Updating employee {}", employee);
+		return employeeRepository.save(employee);
+	}
 }

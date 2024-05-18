@@ -34,4 +34,17 @@ class EmployeeServiceTest {
 		//then
 		assertThat(result).hasSize(2);
 	}
+
+	@Test
+	void should_return_updated_employee() {
+		//given
+		Employee employeeToAdd = new Employee("John", "Doe", "XXXXXXXXXXX", "developer", "1231212", "host");
+		employeeService.addEmployee(employeeToAdd);
+		Employee employeeToUpdate = new Employee("Bruce", "Willis", "XXXXXXXXXXX", "developer", "1231212", "host");
+		//when
+		Employee result = employeeService.updateEmployee(employeeToUpdate);
+		//then
+		assertThat(result.getName()).isEqualTo("Bruce");
+		assertThat(result.getSurname()).isEqualTo("Willis");
+	}
 }
