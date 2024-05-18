@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 class EmployeeServiceTest {
@@ -72,5 +73,15 @@ class EmployeeServiceTest {
 		assertThat(result.getSurname()).isEqualTo("Doe");
 	}
 
-
+	@Test
+	void should_return_exception_when_employee_not_found() {
+		//given
+		Employee employeeToAdd = new Employee("John", "Doe", "XXXXXXXXXXX", "developer", "1231212", "host");
+		Employee added = employeeService.addEmployee(employeeToAdd);
+		//when
+		//then
+		assertThatThrownBy(() -> employeeService.getEmployeeById(added.getId() + 1))
+				.isInstanceOf(EmployeeNotFoundException.class)
+				.hasMessageContaining("Employee not found");
+	}
 }
