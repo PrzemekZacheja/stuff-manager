@@ -31,3 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
+/.mysql-data/db/#innodb_redo/#ib_redo10

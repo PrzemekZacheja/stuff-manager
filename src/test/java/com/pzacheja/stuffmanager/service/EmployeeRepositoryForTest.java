@@ -104,6 +104,7 @@ class EmployeeRepositoryForTest implements EmployeeRepository {
 
 	@Override
 	public <S extends Employee> S save(final S entity) {
+		entity.setId(id);
 		repository.put(getId(), entity);
 		return entity;
 	}
@@ -140,7 +141,7 @@ class EmployeeRepositoryForTest implements EmployeeRepository {
 
 	@Override
 	public void deleteById(final Long aLong) {
-
+		repository.remove(aLong);
 	}
 
 	@Override
@@ -172,4 +173,5 @@ class EmployeeRepositoryForTest implements EmployeeRepository {
 	public Page<Employee> findAll(final Pageable pageable) {
 		return null;
 	}
+
 }

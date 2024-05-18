@@ -26,4 +26,15 @@ class EmployeeService {
 		log.info("Updating employee {}", employee);
 		return employeeRepository.save(employee);
 	}
+
+	void deleteEmployee(final Long id) {
+		log.info("Deleting employee {}", id);
+		employeeRepository.deleteById(id);
+	}
+
+	Employee getEmployeeById(final Long id) {
+		log.info("Getting employee by id {}", id);
+		return employeeRepository.findById(id)
+			.orElseThrow(() -> new EmployeeNotFoundException("Employee not found with id " + id));
+	}
 }

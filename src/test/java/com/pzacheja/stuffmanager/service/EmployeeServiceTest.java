@@ -47,4 +47,30 @@ class EmployeeServiceTest {
 		assertThat(result.getName()).isEqualTo("Bruce");
 		assertThat(result.getSurname()).isEqualTo("Willis");
 	}
+
+	@Test
+	void should_delete_employee_by_id() {
+		//given
+		Employee employeeToAdd = new Employee("John", "Doe", "XXXXXXXXXXX", "developer", "1231212", "host");
+		Employee added = employeeService.addEmployee(employeeToAdd);
+		//when
+		employeeService.deleteEmployee(added.getId());
+		//then
+		assertThat(employeeRepo.findAll()
+		                       .size()).isEqualTo(0);
+	}
+
+	@Test
+	void should_return_employee_by_id() {
+		//given
+		Employee employeeToAdd = new Employee("John", "Doe", "XXXXXXXXXXX", "developer", "1231212", "host");
+		Employee added = employeeService.addEmployee(employeeToAdd);
+		//when
+		Employee result = employeeService.getEmployeeById(added.getId());
+		//then
+		assertThat(result.getName()).isEqualTo("John");
+		assertThat(result.getSurname()).isEqualTo("Doe");
+	}
+
+
 }
