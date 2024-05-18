@@ -3,7 +3,9 @@ package com.pzacheja.stuffmanager.service;
 import com.pzacheja.stuffmanager.model.Employee;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
+
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 class EmployeeServiceTest {
 	EmployeeRepositoryForTest employeeRepo = new EmployeeRepositoryForTest();
@@ -12,10 +14,24 @@ class EmployeeServiceTest {
 	@Test
 	void should_add_employee_and_returned_added_employee() {
 		//given
-		Employee employeeToAdd = new Employee( "John", "Doe", "xxx@dot.com", "developer", "1231212", "host");
+		Employee employeeToAdd = new Employee("John", "Doe", "xxx@dot.com", "developer", "1231212", "host");
 		//when
 		employeeService.addEmployee(employeeToAdd);
 		//then
-		assertEquals(employeeRepo.findAll().size(), 1);
+		assertThat(employeeRepo.findAll()
+		                       .size()).isEqualTo(1);
+	}
+
+	@Test
+	void should_return_two_employees() {
+		//given
+		Employee employeeToAdd1 = new Employee("John", "Doe", "XXXXXXXXXXX", "developer", "1231212", "host");
+		Employee employeeToAdd2 = new Employee("Bruce", "Lee", "XXXXXXXXXXX", "developer", "1231212", "host");
+		employeeService.addEmployee(employeeToAdd1);
+		employeeService.addEmployee(employeeToAdd2);
+		//when
+		List<Employee> result = employeeService.getAllEmployees();
+		//then
+		assertThat(result).hasSize(2);
 	}
 }

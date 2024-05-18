@@ -16,6 +16,11 @@ import java.util.function.Function;
 
 class EmployeeRepositoryForTest implements EmployeeRepository {
 	private final Map<Long, Employee> repository = new HashMap<>();
+	private Long id = 1L;
+
+	Long getId() {
+		return id++;
+	}
 
 	@Override
 	public void flush() {
@@ -99,7 +104,7 @@ class EmployeeRepositoryForTest implements EmployeeRepository {
 
 	@Override
 	public <S extends Employee> S save(final S entity) {
-		repository.put(entity.getId(), entity);
+		repository.put(getId(), entity);
 		return entity;
 	}
 
