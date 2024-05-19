@@ -44,7 +44,10 @@ public class Employee implements Serializable {
 		this.jobTitle = jobTitle;
 		this.phone = phone;
 		this.imageUrl = imageUrl;
-		this.employeeCode = UUID.randomUUID().toString();
+		if (employeeCode.isBlank()) {
+			this.employeeCode = UUID.randomUUID()
+			                        .toString();
+		}
 	}
 
 	@Override

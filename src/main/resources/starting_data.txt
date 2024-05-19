@@ -1,0 +1,29 @@
+{
+ {
+    "name": "John",
+    "surname": "Doe",
+    "email": "john.doe@example.com",
+    "jobTitle": "Programista",
+    "phone": "+48 123 456 789",
+    "imageUrl": "https://example.com/john-doe.jpg"
+  }
+{
+  {
+    "name": "Anna",
+    "surname": "Kowalska",
+    "email": "anna.kowalska@example.com",
+    "jobTitle": "Specjalista ds. HR",
+    "phone": "+48 987 654 321",
+    "imageUrl": "https://example.com/anna-kowalska.jpg"
+  }
+}
+{
+  {
+    "name": "Robert",
+    "surname": "Nowak",
+    "email": "robert.nowak@example.com",
+    "jobTitle": "Kierownik projektu",
+    "phone": "+48 555 123 456",
+    "imageUrl": "https://example.com/robert-nowak.jpg"
+  }
+}
